@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DroneSys 2026 · The Second Workshop on Autonomous Drone Computing Systems and Applications</title>
+  <meta name="description" content="DroneSys 2026: The Second Workshop on Autonomous Drone Computing Systems and Applications, co-located with ACM/IEEE SEC 2026, Santa Clara, CA." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛩️%3C/text%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #A500FF;
+      --accent-soft: #F8EEFF;
+      --text: #1A1916;
+      --text-secondary: #555;
+      --text-muted: #888;
+      --bg: #FFFFFF;
+      --bg-soft: #F7F6F2;
+      --border: #E2DFD8;
+      --max-width: 960px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ── Top nav ── */
+    nav.top {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+    nav.top .inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav.top .brand {
+      font-weight: 600;
+      color: var(--text);
+      margin-right: auto;
+    }
+    nav.top a:not(.brand) {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+    nav.top a:not(.brand):hover { color: var(--accent); text-decoration: none; }
+
+    /* ── Hero ── */
+    header.hero {
+      background: linear-gradient(135deg, var(--text) 0%, #2a2728 100%);
+      color: #f5f4f0;
+      padding: 4rem 1.5rem 3.5rem;
+    }
+    header.hero .inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #b8a0d8;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin: 0 0 1rem 0;
+      letter-spacing: -0.01em;
+    }
+    .hero .subtitle {
+      font-size: 1.1rem;
+      color: #cfc8d8;
+      max-width: 720px;
+      margin: 0;
+    }
+    .hero .meta {
+      margin-top: 1.75rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .hero .meta-item .label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b8a0d8;
+      margin-bottom: 0.25rem;
+    }
+    .hero .meta-item .value { color: #f5f4f0; }
+    .hero .meta-item a { color: #f5f4f0; border-bottom: 1px dotted #b8a0d8; }
+    .hero .meta-item a:hover { text-decoration: none; border-bottom-color: #f5f4f0; }
+
+    /* ── Sections ── */
+    main { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3rem 0 1rem; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 1.25rem 0;
+      letter-spacing: -0.005em;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.75rem 0 0.5rem;
+      color: var(--text);
+    }
+    p { margin: 0 0 1rem 0; color: var(--text-secondary); }
+    ul { padding-left: 1.4rem; margin: 0 0 1rem 0; color: var(--text-secondary); }
+    li { margin-bottom: 0.4rem; }
+
+    /* ── Dates table ── */
+    .dates {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 0.5rem 0 1rem;
+    }
+    .dates .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .dates .row:last-child { border-bottom: none; }
+    .dates .row:nth-child(odd) { background: var(--bg-soft); }
+    .dates .milestone { color: var(--text); font-weight: 500; }
+    .dates .date { font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; color: var(--text-secondary); }
+
+    /* ── Highlight callout ── */
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      margin: 0 0 1.25rem;
+      color: var(--text);
+    }
+    .callout p { color: var(--text); margin: 0; }
+    .callout p + p { margin-top: 0.4rem; }
+
+    /* ── People grid ── */
+    .people {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.6rem 1.5rem;
+      margin: 0.5rem 0 1rem;
+      padding-left: 0;
+      list-style: none;
+    }
+    .people li { color: var(--text-secondary); font-size: 0.95rem; }
+    .people li .name { color: var(--text); }
+    .people li .aff { color: var(--text-muted); font-size: 0.88rem; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem 3rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    footer a { color: var(--text-secondary); }
+
+    @media (max-width: 600px) {
+      nav.top .inner { padding: 0.75rem 1rem; gap: 1rem; }
+      .hero { padding: 3rem 1.25rem 2.5rem; }
+      .hero .meta { gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="#top">DroneSys 2026</a>
+    <a href="#overview">Overview</a>
+    <a href="#dates">Dates</a>
+    <a href="#topics">Topics</a>
+    <a href="#submission">Submission</a>
+    <a href="#committee">Committee</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="inner">
+    <div class="hero-label">ACM/IEEE SEC 2026 · Workshop</div>
+    <h1>DroneSys 2026: The Second Workshop on Autonomous Drone Computing Systems and Applications</h1>
+    <p class="subtitle">A focused forum on systems, platforms, and applications for autonomous drone computing — at the intersection of edge computing, embedded and mobile systems, real-time AI, autonomy, networking, security, and cyber-physical systems for unmanned aerial platforms.</p>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="label">Date</span>
+        <span class="value">Co-located with SEC 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Location</span>
+        <span class="value">Santa Clara, CA, USA</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Format</span>
+        <span class="value">Half-day workshop</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Host conference</span>
+        <a href="https://acm-ieee-sec.org/2026/" target="_blank" rel="noopener">ACM/IEEE SEC 2026</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="overview">
+  <h2>Overview</h2>
+  <p>DroneSys 2026 invites original research papers and position papers on the future of autonomous drone computing systems. As drones increasingly incorporate onboard AI, edge-assisted perception, collaborative autonomy, and real-time decision making, they raise distinctive systems challenges involving latency, reliability, energy, safety, communication, and deployment at scale.</p>
+  <p>The workshop emphasizes a <strong>computation-centric perspective</strong> on drone autonomy: how to design drone systems that are efficient, reliable, safe, secure, and deployable in real-world environments. The scope spans both fundamental systems research and application-driven studies that surface new requirements for aerial autonomy.</p>
+  <p>DroneSys aims to bring together researchers and practitioners from edge computing, mobile and embedded systems, robotics, networking, CPS, and applied AI to discuss computational foundations for next-generation drone systems.</p>
+  <div class="callout">
+    <p><strong>Community-first by design.</strong> DroneSys is intentionally a focused community forum rather than a competitive mini-conference — a venue for candid discussion of early and exploratory work on drone systems problems that lack a dedicated home at systems venues.</p>
+  </div>
+</section>
+
+<section id="dates">
+  <h2>Important Dates</h2>
+  <div class="dates">
+    <div class="row"><span class="milestone">Submission deadline</span><span class="date">June 25, 2026</span></div>
+    <div class="row"><span class="milestone">Acceptance notification</span><span class="date">August 15, 2026</span></div>
+    <div class="row"><span class="milestone">Camera-ready deadline</span><span class="date">August 22, 2026</span></div>
+    <div class="row"><span class="milestone">Program ready</span><span class="date">September 15, 2026</span></div>
+  </div>
+</section>
+
+<section id="topics">
+  <h2>Topics of Interest</h2>
+  <p>Topics of interest include, but are not limited to:</p>
+  <ul>
+    <li>Edge and embedded architectures for drone autonomy</li>
+    <li>Onboard AI, efficient inference, and resource-aware autonomy</li>
+    <li>Real-time perception, planning, and control</li>
+    <li>Real-time sensor fusion on resource-constrained platforms</li>
+    <li>Swarm intelligence, coordination, and drone-to-drone networking</li>
+    <li>AI offloading, task migration, and air–ground–edge–cloud collaboration</li>
+    <li>Safety, security, privacy, and trust in drone operations</li>
+    <li>Benchmarks, testbeds, simulators, and real-world deployments</li>
+    <li>Applications in public safety, agriculture, logistics, inspection, AR/VR-enhanced operations, and disaster response</li>
+    <li>Human factors, policy, and regulation-aware drone systems</li>
+  </ul>
+</section>
+
+<section id="submission">
+  <h2>Submission Guidelines</h2>
+  <ul>
+    <li>Submissions should present original, unpublished work and must not be under review elsewhere.</li>
+    <li>The workshop will use a rigorous peer-review process, with at least three reviews per paper where feasible.</li>
+    <li>Workshop papers are expected to emphasize emerging topics, early research results, novel ideas, best practices, or case studies, consistent with SEC workshop goals.</li>
+    <li>Formatting, page limits, and submission instructions will follow the final SEC 2026 workshop guidelines and the workshop submission site.</li>
+  </ul>
+  <p>In addition to regular papers, the workshop may also include invited talks, a panel, demos, or posters, depending on the final submission pool and program structure.</p>
+</section>
+
+<section id="committee">
+  <h2>Organizing Committee</h2>
+
+  <h3>Workshop Co-Chairs</h3>
+  <ul class="people">
+    <li><a href="https://liangkai.org/" target="_blank" rel="noopener" class="name">Liangkai Liu</a><br/><span class="aff">University of Michigan</span></li>
+    <li><a href="https://www.weisongshi.org/" target="_blank" rel="noopener" class="name">Weisong Shi</a><br/><span class="aff">University of Delaware</span></li>
+  </ul>
+
+  <h3>TPC Chair</h3>
+  <ul class="people">
+    <li><span class="name">Christopher Stewart</span><br/><span class="aff">The Ohio State University</span></li>
+  </ul>
+
+  <h3>Program Committee</h3>
+  <ul class="people">
+    <li><span class="name">Jayson Boubin</span><br/><span class="aff">SUNY Binghamton</span></li>
+    <li><span class="name">Karthik Dantu</span><br/><span class="aff">University at Buffalo</span></li>
+    <li><span class="name">Ting Zhu</span><br/><span class="aff">Ohio State University</span></li>
+    <li><span class="name">Antonio Loquercio</span><br/><span class="aff">University of Pennsylvania</span></li>
+    <li><span class="name">Guoquan (Paul) Huang</span><br/><span class="aff">University of Delaware</span></li>
+    <li><span class="name">Jingao Xu</span><br/><span class="aff">Carnegie Mellon University</span></li>
+    <li><span class="name">Liangkai Liu</span><br/><span class="aff">University of Michigan</span></li>
+    <li><span class="name">Mengyu Liu</span><br/><span class="aff">Washington State University</span></li>
+    <li><span class="name">Qingzhao Zhang</span><br/><span class="aff">University of Arizona</span></li>
+    <li><span class="name">Shareef Ahmed</span><br/><span class="aff">University of South Florida</span></li>
+    <li><span class="name">Weisong Shi</span><br/><span class="aff">University of Delaware</span></li>
+    <li><span class="name">Yiwen Hu</span><br/><span class="aff">UMBC</span></li>
+    <li><span class="name">Christopher Stewart</span><br/><span class="aff">The Ohio State University</span></li>
+  </ul>
+
+  <h3>Steering Committee</h3>
+  <ul class="people">
+    <li><span class="name">Weisong Shi</span> <em>(Chair)</em><br/><span class="aff">University of Delaware</span></li>
+    <li><span class="name">Christopher Stewart</span><br/><span class="aff">The Ohio State University</span></li>
+    <li><span class="name">Rahul Mangharam</span><br/><span class="aff">University of Pennsylvania</span></li>
+    <li><span class="name">Sabine Brunswicker</span><br/><span class="aff">Purdue University</span></li>
+    <li><span class="name">Kevin Butler</span><br/><span class="aff">University of Florida</span></li>
+    <li><span class="name">Liangkai Liu</span><br/><span class="aff">University of Michigan</span></li>
+  </ul>
+</section>
+
+<section id="history">
+  <h2>Workshop History</h2>
+  <p><a href="https://acm-ieee-sec.org/2025/dronesys.php" target="_blank" rel="noopener">DroneSys 2025</a> was the first edition of the workshop series. It was co-located with ACM/IEEE SEC 2025 and held on December 6, 2025, featuring an invited talk by Christopher Stewart and four paper presentations. The first edition established the workshop identity at the intersection of edge computing and real-world drone autonomy.</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>For questions about the workshop, please contact the co-chairs:</p>
+  <ul>
+    <li>Liangkai Liu — <a href="mailto:liangkai@umich.edu">liangkai@umich.edu</a></li>
+    <li>Weisong Shi — <a href="mailto:weisong@udel.edu">weisong@udel.edu</a></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>DroneSys 2026 · Co-located with <a href="https://acm-ieee-sec.org/2026/" target="_blank" rel="noopener">ACM/IEEE SEC 2026</a></p>
+</footer>
+
+</body>
+</html>
